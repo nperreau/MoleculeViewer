@@ -133,6 +133,7 @@ Here are some examples of molecules, taken using the photo mode of Molecule View
 - [X] Photo mode functionality
 - [X] Add controls to rotate the molecule.
 - [ ] Add controls to zoom in and out.
+- [ ] Display a better message when PubChem cannot find the name of a valid SMILES.
 - [ ] Add camera stacking to avoid large molecules hiding the molecule name and formula.
 - [ ] Additional molecular visualization styles
 - [ ] Improved rendering and materials
