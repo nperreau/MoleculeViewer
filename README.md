@@ -145,7 +145,7 @@ Open the project using the Unity Editor and build normally.
 
 ## Author
 
-**Naïl Perreau**
+[**Naïl Perreau**](https://nperreau.github.io/)
 
 - LinkedIn: https://www.linkedin.com/in/nailperreau/
 - GitHub: https://github.com/nperreau
