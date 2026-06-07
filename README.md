@@ -129,7 +129,7 @@ Traditional chemistry software often prioritizes functionality over visual prese
 - [ ] Additional molecular visualization styles
 - [ ] Improved rendering and materials
 - [ ] Molecular measurements and annotations
-- [ ] Large molecule optimization
+- [ ] Replace per-atom GameObjects with mesh batching or GPU instancing for large molecules
 
 ---
 

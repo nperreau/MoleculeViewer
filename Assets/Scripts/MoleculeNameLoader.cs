@@ -53,7 +53,7 @@ namespace MoleculeViewer
             if (!string.IsNullOrWhiteSpace(smiles) && lastTextUpdate + requestsDelay < Time.time && !newRequestSent)
             {
                 newRequestSent = true;
-                currentCoroutine = StartCoroutine(GetMoleculeIupac(smiles));
+                currentCoroutine = StartCoroutine(GetMoleculeName(smiles));
             }
 
             bool shouldDisplayText = ShouldDisplayText;
@@ -61,6 +61,28 @@ namespace MoleculeViewer
 
             if (loadingAnimation)
                 loadingAnimation.SetActive(ShouldDisplayLoading);
+        }
+
+        IEnumerator GetMoleculeName(string smiles)
+        {
+            string url = URIs.SmilesDescription(smiles);
+            using (UnityWebRequest newRequest = UnityWebRequest.Get(url))
+            {
+                currentRequest = newRequest;
+                yield return newRequest.SendWebRequest();
+
+                if (newRequest.result == UnityWebRequest.Result.Success)
+                {
+                    var data = JsonUtility.FromJson<PubChemDescriptionResponse>(newRequest.downloadHandler.text);
+
+                    NameText.text = $"{data.InformationList.Information.First().Title}";
+                    textReady = true;
+                }
+                else
+                    Debug.LogError("Error: " + newRequest.error);
+            }
+
+            currentRequest = null;
         }
 
         IEnumerator GetMoleculeIupac(string smiles)
