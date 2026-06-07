@@ -131,10 +131,11 @@ Here are some examples of molecules, taken using the photo mode of Molecule View
 
 - [X] Common name retrieval
 - [X] Photo mode functionality
+- [ ] Add controls to rotate the molecule and zoom in and out.
 - [ ] Additional molecular visualization styles
 - [ ] Improved rendering and materials
 - [ ] Molecular measurements and annotations
-- [ ] Replace per-atom GameObjects with mesh batching or GPU instancing for large molecules
+- [X] Replace per-atom GameObjects with mesh batching or GPU instancing for large molecules
 
 ---
 
