@@ -130,7 +130,7 @@ Traditional chemistry software often prioritizes functionality over visual prese
 ## Roadmap
 
 - [X] Common name retrieval
-- [ ] Photo mode functionality
+- [X] Photo mode functionality
 - [ ] Additional molecular visualization styles
 - [ ] Improved rendering and materials
 - [ ] Molecular measurements and annotations
