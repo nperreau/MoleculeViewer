@@ -114,7 +114,7 @@ Traditional chemistry software often prioritizes functionality over visual prese
 ---
 
 ## Gallery
-
+Here are some examples of molecules, taken using the photo mode of Molecule Viewer:
 <p align="center">
   <img src="docs/gallery/caffeine.png" alt="Caffeine Visualization" width="600">
 </p>
@@ -130,12 +130,14 @@ Traditional chemistry software often prioritizes functionality over visual prese
 ## Roadmap
 
 - [X] Common name retrieval
-- [ ] Photo mode functionality
+- [X] Photo mode functionality
+- [X] Add controls to rotate the molecule.
+- [ ] Add controls to zoom in and out.
 - [ ] Add camera stacking to avoid large molecules hiding the molecule name and formula.
 - [ ] Additional molecular visualization styles
 - [ ] Improved rendering and materials
 - [ ] Molecular measurements and annotations
-- [ ] Replace per-atom GameObjects with mesh batching or GPU instancing for large molecules
+- [X] Replace per-atom GameObjects with mesh batching or GPU instancing for large molecules
 
 ---
 
