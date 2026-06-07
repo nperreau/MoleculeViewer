@@ -3,7 +3,7 @@
 Interactive desktop application for visualizing molecular structures in real time using Unity, RDKit, and PubChem.
 
 <p align="center">
-  <img src="docs/gallery/aspirin.png" alt="Molecule Viewer Screenshot" width="900">
+  <img src="docs/gallery/molecule_viewer.png" alt="Molecule Viewer Screenshot" width="900">
 </p>
 
 ## Overview
