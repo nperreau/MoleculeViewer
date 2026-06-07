@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using GraphMolWrap;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [DisallowMultipleComponent]
 public class RDKit3DGenerator : MonoBehaviour
@@ -20,7 +21,10 @@ public class RDKit3DGenerator : MonoBehaviour
     [SerializeField]
     private bool centerMolecule = true;
     [SerializeField]
-    private Transform moleculeTransform;
+    private Transform moleculeRoot;
+
+    private Matrix4x4 RootMatrix => moleculeRoot ? moleculeRoot.localToWorldMatrix : Matrix4x4.identity;
+
     [SerializeField]
     private Transform invalidSMILES;
     
@@ -244,11 +248,14 @@ public class RDKit3DGenerator : MonoBehaviour
     {
         int sourceIndex = 0;
         int remaining = group.Matrices.Count;
+        var rootMatrix = RootMatrix;
 
         while (remaining > 0)
         {
             int count = Mathf.Min(MaxInstancesPerDraw, remaining);
-            group.Matrices.CopyTo(sourceIndex, drawBuffer, 0, count);
+            for (int i = 0; i < count; i++)
+                drawBuffer[i] = rootMatrix * group.Matrices[sourceIndex + i];
+
             Graphics.DrawMeshInstanced(mesh, 0, material, drawBuffer, count, group.MaterialProperties);
 
             sourceIndex += count;
@@ -258,19 +265,19 @@ public class RDKit3DGenerator : MonoBehaviour
 
     private Mesh GetAtomMesh()
     {
-        if (atomMesh != null)
+        if (atomMesh)
             return atomMesh;
 
-        if (generatedAtomMesh != null)
+        if (generatedAtomMesh)
             return generatedAtomMesh;
 
         GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         sphere.name = "Generated Atom Mesh Source";
-        sphere.hideFlags = HideFlags.HideAndDontSave;
+        sphere.hideFlags = HideFlags.DontSave;
         sphere.SetActive(false);
 
         MeshFilter meshFilter = sphere.GetComponent<MeshFilter>();
-        if (meshFilter != null && meshFilter.sharedMesh != null)
+        if (meshFilter && meshFilter.sharedMesh)
         {
             generatedAtomMesh = Instantiate(meshFilter.sharedMesh);
             generatedAtomMesh.name = "Generated Atom Sphere Mesh";

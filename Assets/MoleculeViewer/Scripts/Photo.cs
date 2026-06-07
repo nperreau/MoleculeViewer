@@ -20,24 +20,22 @@ namespace MoleculeViewer
             FileBrowser.ShowSaveDialog(PerformTakePhoto, null, pickMode: FileBrowser.PickMode.Files);
         }
 
-        void PerformTakePhoto([NotNull] string[] paths) => StartCoroutine(PhotoRoutine(paths.First()));
+        private void PerformTakePhoto([NotNull] string[] paths) => StartCoroutine(PhotoRoutine(paths.First()));
 
-        private IEnumerator PhotoRoutine(string path)
+        private IEnumerator PhotoRoutine([NotNull] string path)
         {
             try
             {
-                foreach (GameObject go in objectsToHide)
-                    if (go)
-                        go.SetActive(false);
+                foreach (GameObject go in objectsToHide.Where(go => go))
+                    go.SetActive(false);
 
                 yield return new WaitForEndOfFrame();
                 ScreenCapture.CaptureScreenshot(path);
             }
             finally
             {
-                foreach (GameObject go in objectsToHide)
-                    if (go)
-                        go.SetActive(true);
+                foreach (GameObject go in objectsToHide.Where(go => go))
+                    go.SetActive(true);
             }
         }
     }

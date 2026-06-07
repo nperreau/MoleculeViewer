@@ -131,6 +131,7 @@ Traditional chemistry software often prioritizes functionality over visual prese
 
 - [X] Common name retrieval
 - [ ] Photo mode functionality
+- [ ] Add camera stacking to avoid large molecules hiding the molecule name and formula.
 - [ ] Additional molecular visualization styles
 - [ ] Improved rendering and materials
 - [ ] Molecular measurements and annotations
