@@ -1,0 +1,88 @@
+using System.Collections;
+using System.Linq;
+using MoleculeViewer.PubChem;
+using TMPro;
+using UnityEngine;
+using UnityEngine.Networking;
+
+namespace MoleculeViewer
+{
+    public class MoleculeNameLoader : MonoBehaviour
+    {
+        public float requestsDelay = 0.5f;
+        private float lastTextUpdate = 0;
+        private string smiles;
+        private bool newRequestSent = false;
+        private bool textReady = false;
+
+        public GameObject loadingAnimation;
+
+        private UnityWebRequest currentRequest;
+        Coroutine currentCoroutine;
+
+        [field: SerializeField]
+        public TextMeshProUGUI NameText { get; private set; }
+        [field: SerializeField]
+        public TextMeshProUGUI FormulaText { get; private set; }
+
+        private bool ShouldDisplayText => textReady;
+        private bool ShouldDisplayLoading => !textReady && newRequestSent;
+
+        public void SetSMILES(string smiles)
+        {
+            this.smiles = smiles;
+            newRequestSent = false;
+            lastTextUpdate = Time.time;
+            textReady = false;
+
+            AbortCurrentRequest();
+        }
+
+        void AbortCurrentRequest()
+        {
+            if (currentRequest != null)
+                currentRequest.Abort();
+            currentRequest = null;
+
+            if (currentCoroutine != null)
+                StopCoroutine(currentCoroutine);
+        }
+        
+        private void Update()
+        {
+            if (!string.IsNullOrWhiteSpace(smiles) && lastTextUpdate + requestsDelay < Time.time && !newRequestSent)
+            {
+                newRequestSent = true;
+                currentCoroutine = StartCoroutine(GetMoleculeIupac(smiles));
+            }
+
+            bool shouldDisplayText = ShouldDisplayText;
+            NameText.gameObject.SetActive(shouldDisplayText);
+
+            if (loadingAnimation)
+                loadingAnimation.SetActive(ShouldDisplayLoading);
+        }
+
+        IEnumerator GetMoleculeIupac(string smiles)
+        {
+            string url = URIs.SmilesProperties(smiles, "IUPACName", "MolecularFormula");
+            using (UnityWebRequest newRequest = UnityWebRequest.Get(url))
+            {
+                currentRequest = newRequest;
+                yield return newRequest.SendWebRequest();
+
+                if (newRequest.result == UnityWebRequest.Result.Success)
+                {
+                    var data = JsonUtility.FromJson<PubChemResponse>(newRequest.downloadHandler.text);
+
+                    NameText.text = $"{data.PropertyTable.Properties.First().IUPACName}";
+                    textReady = true;
+                }
+                else
+                    Debug.LogError("Error: " + newRequest.error);
+            }
+
+            currentRequest = null;
+        }
+    }
+}

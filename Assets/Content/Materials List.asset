@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 721ec58acd7e67142b9b0d9c03595ddc, type: 3}
+  m_Name: Materials List
+  m_EditorClassIdentifier: MoleculeViewer::MaterialList
+  materials:
+  - symbol: C
+    material: {fileID: 2100000, guid: 298285c470fc9d54a9ec7cb8699e5940, type: 2}
+  - symbol: Cl
+    material: {fileID: 2100000, guid: d97af1234b983c24dbd0d00efa75f4f9, type: 2}
+  - symbol: H
+    material: {fileID: 2100000, guid: f3f4dc59982d64c4ba7f3a213887ba7c, type: 2}
+  - symbol: N
+    material: {fileID: 2100000, guid: a3dd11c326b3ce84481236908c3c16eb, type: 2}
+  - symbol: O
+    material: {fileID: 2100000, guid: 2a97f88edd575704287ae23eb5829778, type: 2}
+  - symbol: P
+    material: {fileID: 2100000, guid: 61f2253b63315c74abcf8e5b98c5297e, type: 2}
+  - symbol: S
+    material: {fileID: 2100000, guid: 4ffcfce8238772c4ba2564f93cf4d0c9, type: 2}
+  defaultMaterial: {fileID: 2100000, guid: 44232ffce4b834e47b4a94bcf5c45974, type: 2}
