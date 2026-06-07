@@ -39,6 +39,11 @@ Given a SMILES string, the application can:
 
 [RDKit](https://www.rdkit.org/) is used to transform molecular representations into structured chemical data that can be rendered and analyzed within the application.
 
+> ##### Why RDKit?
+>
+> While PubChem can provide much of the information required for visualization, this project intentionally integrates RDKit to explore real-world cheminformatics workflows. The objective was not simply to render molecules, but to gain experience processing molecular structures using industry-standard chemistry tooling.
+
+
 ### PubChem Integration
 
 - Metadata retrieval
