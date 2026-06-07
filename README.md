@@ -114,7 +114,7 @@ Traditional chemistry software often prioritizes functionality over visual prese
 ---
 
 ## Gallery
-
+Here are some examples of molecules, taken using the photo mode of Molecule Viewer:
 <p align="center">
   <img src="docs/gallery/caffeine.png" alt="Caffeine Visualization" width="600">
 </p>
