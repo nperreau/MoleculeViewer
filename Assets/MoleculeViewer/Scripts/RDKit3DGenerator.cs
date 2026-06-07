@@ -138,6 +138,9 @@ public class RDKit3DGenerator : MonoBehaviour
 
     public void GenerateAndPrepareMolecule(string smilesString)
     {
+        if (smiles == smilesString)
+            return;
+
         smiles = smilesString;
 
         renderGroups.Clear();

@@ -30,6 +30,9 @@ namespace MoleculeViewer
 
         public void SetSMILES(string smiles)
         {
+            if (this.smiles == smiles)
+                return;
+
             this.smiles = smiles;
             newRequestSent = false;
             lastTextUpdate = Time.time;
