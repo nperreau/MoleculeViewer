@@ -241,8 +241,17 @@ namespace MoleculeViewer
             }
         }
 
-        private void ShowGenerationLoading() => generatingText.SetActive(true);
-        private void HideGenerationLoading() => generatingText.SetActive(false);
+        private void ShowGenerationLoading()
+        {
+            if (generatingText)
+                generatingText.SetActive(true);
+        }
+
+        private void HideGenerationLoading()
+        {
+            if (generatingText)
+                generatingText.SetActive(false);
+        }
 
         private static async Task<Expected<RWMol, Exception>> LaunchRDKitEmbedingThread(RWMol mol, MoleculeOptimization moleculeOptimization)
         {
