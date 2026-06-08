@@ -62,7 +62,7 @@ namespace MoleculeViewer
             if (currentCoroutine != null)
                 StopCoroutine(currentCoroutine);
         }
-        
+
         private void Update()
         {
             if (!string.IsNullOrWhiteSpace(smiles) && lastTextUpdate + requestsDelay < Time.time && !newRequestSent)
