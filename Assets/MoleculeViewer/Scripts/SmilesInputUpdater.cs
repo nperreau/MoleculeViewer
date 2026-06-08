@@ -1,3 +1,4 @@
+using System.Collections;
 using MoleculeViewer;
 using UnityEngine;
 using TMPro;
@@ -12,6 +13,8 @@ public class SmilesInputUpdater : MonoBehaviour
     [field: SerializeField]
     public MoleculeNameLoader NameLoader { get; private set; }
 
+    private bool _debouncing = false;
+
     private void OnEnable()
     {
         if (Text)
@@ -24,12 +27,28 @@ public class SmilesInputUpdater : MonoBehaviour
             Text.onValueChanged.RemoveListener(OnChanged);
     }
 
-    private void OnChanged(string smiles)
+    private void OnChanged(string smiles) => Debounce();
+
+    private void Debounce()
     {
+        if (_debouncing)
+            return;
+
+        StartCoroutine(DebounceRoutine());
+    }
+
+    IEnumerator DebounceRoutine()
+    {
+        _debouncing = true;
+
+        yield return new WaitForEndOfFrame();
+
         if (Generator)
-            Generator.GenerateAndPrepareMolecule(smiles);
+            _ = Generator.GenerateAndPrepareMolecule(Text.text);
 
         if (NameLoader)
-            NameLoader.SetSMILES(smiles);
+            NameLoader.SetSMILES(Text.text);
+
+        _debouncing = false;
     }
 }
