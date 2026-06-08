@@ -87,15 +87,15 @@ namespace MoleculeViewer
                 currentRequest = newRequest;
                 yield return newRequest.SendWebRequest();
 
-                if (newRequest.result == UnityWebRequest.Result.Success)
-                {
-                    var data = JsonUtility.FromJson<PubChemDescriptionResponse>(newRequest.downloadHandler.text);
+                NameText.text = newRequest.result == UnityWebRequest.Result.Success
+                    ? JsonUtility.FromJson<PubChemDescriptionResponse>(newRequest.downloadHandler.text)
+                      .InformationList.Information.First().Title
+                    : string.Empty;
+                textReady = true;
 
-                    NameText.text = $"{data.InformationList.Information.First().Title}";
-                    textReady = true;
-                }
-                else
+                if (newRequest.result != UnityWebRequest.Result.Success)
                     Debug.LogError("Error: " + newRequest.error);
+
             }
 
             currentRequest = null;
