@@ -565,7 +565,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1398,6 +1398,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MoleculeViewer::MoleculeViewer.Photo
   objectsToHide:
   - {fileID: 319958236}
+  camera: {fileID: 330585545}
 --- !u!1 &887230718
 GameObject:
   m_ObjectHideFlags: 0

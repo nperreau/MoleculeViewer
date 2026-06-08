@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Linq;
 using MoleculeViewer.PubChem;
@@ -25,8 +26,20 @@ namespace MoleculeViewer
         [field: SerializeField]
         public TextMeshProUGUI FormulaText { get; private set; }
 
+        public string CurrentMoleculeName => NameText.text;
+        
+        public static MoleculeNameLoader Current { get; private set; }
+        
         private bool ShouldDisplayText => textReady;
         private bool ShouldDisplayLoading => !textReady && newRequestSent;
+
+        private void Awake()
+        {
+            if (Current)
+                Debug.LogWarning($"{GetType().Name} found more than once!");
+
+            Current = this;
+        }
 
         public void SetSMILES(string smiles)
         {
