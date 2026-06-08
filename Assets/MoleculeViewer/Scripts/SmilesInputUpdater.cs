@@ -27,7 +27,7 @@ public class SmilesInputUpdater : MonoBehaviour
     private void OnChanged(string smiles)
     {
         if (Generator)
-            Generator.GenerateAndPrepareMolecule(smiles);
+            _ = Generator.GenerateAndPrepareMolecule(smiles);
 
         if (NameLoader)
             NameLoader.SetSMILES(smiles);
