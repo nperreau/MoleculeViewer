@@ -56,8 +56,7 @@ namespace MoleculeViewer
 
         void AbortCurrentRequest()
         {
-            if (currentRequest != null)
-                currentRequest.Abort();
+            currentRequest?.Abort();
             currentRequest = null;
 
             if (currentCoroutine != null)
@@ -74,6 +73,7 @@ namespace MoleculeViewer
 
             bool shouldDisplayText = ShouldDisplayText;
             NameText.gameObject.SetActive(shouldDisplayText);
+            FormulaText.gameObject.SetActive(shouldDisplayText);
 
             if (loadingAnimation)
                 loadingAnimation.SetActive(ShouldDisplayLoading);
@@ -95,7 +95,6 @@ namespace MoleculeViewer
 
                 if (newRequest.result != UnityWebRequest.Result.Success)
                     Debug.LogError("Error: " + newRequest.error);
-
             }
 
             currentRequest = null;
