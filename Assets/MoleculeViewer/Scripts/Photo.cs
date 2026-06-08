@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
@@ -15,6 +16,8 @@ namespace MoleculeViewer
     {
         public List<GameObject> objectsToHide;
 
+        public bool useTransparentBackground = false;
+
         [field: SerializeField]
         private Camera camera;
 
@@ -22,6 +25,16 @@ namespace MoleculeViewer
         {
             get => camera ? camera : Camera.main;
             set => camera = value;
+        }
+
+        public static Photo Current { get; private set; }
+
+        private void Awake()
+        {
+            if (Current)
+                Debug.LogWarning($"There is more than one {GetType().Name} in the scene!");
+
+            Current = this;
         }
 
         public void TakePhoto()
@@ -36,22 +49,25 @@ namespace MoleculeViewer
 
         private void PerformTakePhoto([NotNull] string[] paths) => StartCoroutine(PhotoRoutine(paths.First()));
 
-        void HideObjects()
+        private void HideObjects()
         {
             foreach (GameObject go in objectsToHide.Where(go => go))
                 go.SetActive(false);
         }
 
-        void ShowObjects()
+        private void ShowObjects()
         {
             foreach (GameObject go in objectsToHide.Where(go => go))
                 go.SetActive(true);
         }
-        
+
         private IEnumerator PhotoRoutine([NotNull] string path)
         {
             try
             {
+                if (useTransparentBackground)
+                    throw new NotImplementedException();
+
                 // 1. Wait for the end of the frame to ensure everything is stable
                 yield return new WaitForEndOfFrame();
 
@@ -69,13 +85,9 @@ namespace MoleculeViewer
 
                 // Check if the current pipeline supports it and submit
                 if (RenderPipeline.SupportsRenderRequest(Camera, requestData))
-                {
                     RenderPipeline.SubmitRenderRequest(Camera, requestData);
-                }
                 else
-                {
                     Debug.LogError("Render Request not supported by the active pipeline.");
-                }
 
                 // 4. Read the pixels out of the render texture
                 RenderTexture.active = rt;

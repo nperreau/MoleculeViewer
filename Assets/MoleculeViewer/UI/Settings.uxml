@@ -1,0 +1,21 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/MoleculeViewer/UI/styles.uss?fileID=7433441132597879392&amp;guid=d60c560e491bb5748a9d833c563f65ce&amp;type=3#styles"/>
+    <ui:VisualElement name="Canvas" style="flex-grow: 1; align-items: center; align-content: center; justify-content: center; width: 100%; height: 100%;">
+        <ui:VisualElement name="MainPanel" style="width: 75%; height: 75%; min-width: 350px; max-width: none; align-self: center; background-color: rgba(255, 255, 255, 0.259);">
+            <ui:VisualElement name="PanelTitle" style="flex-direction: row; height: 10%; align-items: center;">
+                <ui:Label text="Settings" name="TitleText" style="width: auto; flex-grow: 1; -unity-text-auto-size: best-fit 10px 100px;"/>
+                <ui:Button text="" name="SettingsPanel-CloseButton" style="width: auto; height: 100%; aspect-ratio: 1; padding-top: 0.5%; padding-left: 0.5%; padding-right: 0.5%; padding-bottom: 0.5%; background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0);">
+                    <ui:Image source="project://database/Assets/Simple%20Vector%20Icons/Icons_White/PNG%20icons_white/Symbol%20PNG/Cross.png?fileID=2800000&amp;guid=556cd8705a57bb24e937bf678660b64d&amp;type=3#Cross" style="width: 100%; height: 100%;"/>
+                </ui:Button>
+            </ui:VisualElement>
+            <ui:VisualElement name="PanelContent" style="flex-grow: 1;">
+                <ui:Foldout text="Rendering" name="Rendering" class="left-checkbox-toggle"/>
+                <ui:Foldout text="Photo Mode" name="PhotoMode">
+                    <ui:Toggle label="Show Molecule Name" name="PhotoMode-ShowMoleculeName"/>
+                    <ui:Toggle label="Show Molecule Formula" name="PhotoMode-ShowMoleculeFormula"/>
+                    <ui:Toggle label="Make Background Transparent" name="PhotoMode-UseTransparentBackground"/>
+                </ui:Foldout>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
