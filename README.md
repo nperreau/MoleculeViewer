@@ -1,6 +1,7 @@
 # Molecule Viewer 🔬
 
 Interactive desktop application for visualizing molecular structures in real time using Unity, RDKit, and PubChem.
+> This project is a still a Work-In-Progress.
 
 <p align="center">
   <img src="docs/gallery/molecule_viewer.png" alt="Molecule Viewer Screenshot" width="900">
